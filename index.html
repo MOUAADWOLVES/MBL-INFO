@@ -5,7 +5,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MBL INFO 🏴‍☠️ | لوحة التحكم</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --text: #333;
+            --text-light: #7f8c8d;
+            --border: #ddd;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: var(--text);
+            direction: rtl;
+        }
+
+        #loginScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .login-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .visitor-btn {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .admin-btn {
+            background: var(--accent);
+            color: white;
+        }
+
+        .input-group {
+            position: relative;
+            margin: 15px 0;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .container, .admin-container {
+            display: none;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .published-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .published-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .file-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            z-index: 1000;
+        }
+
+        .success {
+            background: var(--success);
+        }
+
+        .error {
+            background: var(--danger);
+        }
+    </style>
 </head>
 <body>
     <!-- شاشة الدخول -->
@@ -13,138 +160,186 @@
         <div class="login-box">
             <div class="logo">
                 <i class="fas fa-skull"></i>
-                <h1>MBL INFO <span class="pirate">🏴‍☠️</span></h1>
+                <h1>MBL INFO <span>🏴‍☠️</span></h1>
             </div>
-            <div class="access-options">
-                <button class="visitor-btn" onclick="showVisitorView()">
-                    <i class="fas fa-eye"></i> الدخول كزائر
+            <button class="btn visitor-btn" onclick="showVisitorView()">
+                <i class="fas fa-eye"></i> الدخول كزائر
+            </button>
+            <div class="admin-login">
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="adminPass" placeholder="كلمة مرور الإدمن">
+                </div>
+                <button class="btn admin-btn" onclick="checkAdminPass()">
+                    <i class="fas fa-user-shield"></i> دخول كإدمن
                 </button>
-                <div class="or-divider">
-                    <span>أو</span>
-                </div>
-                <div class="admin-login">
-                    <div class="input-group">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="adminPass" placeholder="كلمة مرور الإدمن">
-                    </div>
-                    <button class="admin-btn" onclick="checkAdminPass()">
-                        <i class="fas fa-user-shield"></i> دخول كإدمن
-                    </button>
-                </div>
             </div>
         </div>
     </div>
 
     <!-- واجهة الزوار -->
-    <div class="container" id="visitorView" style="display:none">
-        <header class="main-header">
-            <div class="logo">
-                <i class="fas fa-skull"></i>
-                <h1>MBL INFO <span class="pirate">🏴‍☠️</span></h1>
-            </div>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="ابحث عن ملف أو محتوى...">
-                <button onclick="searchContent()"><i class="fas fa-search"></i></button>
-            </div>
-            <button class="login-btn" onclick="showLogin()">
-                <i class="fas fa-sign-in-alt"></i> دخول الإدمن
-            </button>
-        </header>
-
-        <main class="content-grid" id="publicContent">
-            <div class="welcome-message">
-                <h2><i class="fas fa-compass"></i> مرحبًا بك في أرشيف MBL</h2>
-                <p>استخدم مربع البحث أعلاه للعثور على الملفات والمحتوى المطلوب</p>
-            </div>
-            <div id="searchResults"></div>
-        </main>
-
-        <footer class="main-footer">
-            <p>© 2025 جميع الحقوق محفوظة لـ <span>MBL INFO</span></p>
-            <div class="footer-links">
-                <a href="#"><i class="fas fa-shield-alt"></i> الشروط والأحكام</a>
-                <a href="#"><i class="fas fa-lock"></i> سياسة الخصوصية</a>
-            </div>
-        </footer>
-    </div>
-
-    <!-- لوحة التحكم (للإدمن فقط) -->
-    <div class="admin-container" id="adminPanel" style="display:none">
-        <header class="admin-header">
-            <div class="admin-logo">
-                <i class="fas fa-skull-crossbones"></i>
-                <h1>لوحة التحكم <span class="pirate">🏴‍☠️</span></h1>
-            </div>
-            <div class="admin-actions">
-                <div class="search-box">
-                    <input type="text" id="adminSearch" placeholder="ابحث في الملفات...">
-                    <button onclick="adminSearch()"><i class="fas fa-search"></i></button>
-                </div>
-                <button class="logout-btn" onclick="logout()">
-                    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
-                </button>
-            </div>
-        </header>
-
-        <div class="admin-content">
-            <div class="upload-section">
-                <h2><i class="fas fa-cloud-upload-alt"></i> رفع ملفات جديدة</h2>
-                <div class="upload-box" id="dropZone">
-                    <div class="upload-icon">
-                        <i class="fas fa-file-upload"></i>
-                    </div>
-                    <p class="drag-text">اسحب وأسقط الملفات هنا</p>
-                    <p class="file-limits">الحد الأدنى: 10B | الحد الأقصى: 30GB</p>
-                    <input type="file" id="fileInput" multiple>
-                    <label for="fileInput" class="upload-btn">اختر ملفات</label>
-                    <div class="file-types">
-                        <span><i class="fas fa-image"></i> صور</span>
-                        <span><i class="fas fa-gamepad"></i> ألعاب</span>
-                        <span><i class="fas fa-mobile-alt"></i> تطبيقات</span>
-                        <span><i class="fas fa-file-video"></i> فيديو</span>
-                    </div>
-                </div>
-                <div class="upload-details">
-                    <div class="progress-container">
-                        <div class="progress-bar" id="progressBar">
-                            <div class="progress" id="progress"></div>
-                        </div>
-                        <div class="progress-info">
-                            <span id="progressText">0%</span>
-                            <span id="fileCount">0 ملف</span>
-                            <span id="fileSize">0B</span>
-                        </div>
-                    </div>
-                    <div id="file-size-warning" class="warning-message">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <span></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="content-editor">
-                <h2><i class="fas fa-edit"></i> محرر المحتوى</h2>
-                <div class="editor-toolbar">
-                    <button onclick="formatText('bold')"><i class="fas fa-bold"></i></button>
-                    <button onclick="formatText('italic')"><i class="fas fa-italic"></i></button>
-                    <button onclick="insertImage()"><i class="fas fa-image"></i></button>
-                    <button onclick="insertLink()"><i class="fas fa-link"></i></button>
-                </div>
-                <textarea id="contentEditor" placeholder="اكتب محتوى جديد هنا..."></textarea>
-                <button class="publish-btn" onclick="publishContent()">
-                    <i class="fas fa-paper-plane"></i> نشر التحديثات
-                </button>
-            </div>
-
-            <div class="files-section">
-                <h2><i class="fas fa-folder-open"></i> الملفات المرفوعة</h2>
-                <div class="files-grid" id="adminContent">
-                    <!-- سيتم ملؤها بالملفات -->
-                </div>
-            </div>
+    <div class="container" id="visitorView">
+        <div class="published-content" id="publicContent">
+            <!-- سيتم عرض المحتوى المنشور هنا -->
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- لوحة التحكم -->
+    <div class="admin-container" id="adminPanel">
+        <div class="published-content">
+            <h2>محرر المحتوى</h2>
+            <textarea id="contentEditor" style="width:100%; min-height:200px; padding:10px;"></textarea>
+            <button class="btn" onclick="publishContent()" style="background:var(--success); color:white;">
+                <i class="fas fa-paper-plane"></i> نشر المحتوى
+            </button>
+        </div>
+
+        <div class="published-content">
+            <h2>رفع ملفات</h2>
+            <input type="file" id="fileInput" multiple>
+            <button class="btn" onclick="uploadFiles()" style="background:var(--secondary); margin-top:10px;">
+                <i class="fas fa-upload"></i> رفع الملفات
+            </button>
+            <div id="uploadedFiles"></div>
+        </div>
+    </div>
+
+    <script>
+        // بيانات التطبيق
+        const appData = {
+            content: "",
+            files: []
+        };
+
+        // كلمات السر المقبولة
+        const validPasswords = [
+            "MBL#INFO",
+            "MBL22",
+            "MBL 🇨🇦 🇨🇦 🇨🇦"
+        ];
+
+        // عرض واجهة الزوار
+        function showVisitorView() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('visitorView').style.display = 'block';
+            loadContent();
+        }
+
+        // تسجيل دخول الأدمن
+        function checkAdminPass() {
+            const password = document.getElementById('adminPass').value;
+            if (validPasswords.includes(password)) {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('visitorView').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                loadContent();
+                showNotification('تم تسجيل الدخول بنجاح', 'success');
+            } else {
+                showNotification('كلمة السر غير صحيحة', 'error');
+            }
+        }
+
+        // رفع الملفات
+        function uploadFiles() {
+            const fileInput = document.getElementById('fileInput');
+            const files = fileInput.files;
+            
+            if (files.length === 0) {
+                showNotification('لم تقم باختيار أي ملفات', 'error');
+                return;
+            }
+
+            // محاكاة عملية الرفع
+            setTimeout(() => {
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    appData.files.push({
+                        name: file.name,
+                        size: file.size,
+                        type: file.type,
+                        url: URL.createObjectURL(file)
+                    });
+                }
+                
+                saveContent();
+                showNotification(`تم رفع ${files.length} ملف بنجاح`, 'success');
+                renderFiles();
+            }, 1000);
+        }
+
+        // نشر المحتوى
+        function publishContent() {
+            appData.content = document.getElementById('contentEditor').value;
+            saveContent();
+            showNotification('تم نشر المحتوى بنجاح', 'success');
+        }
+
+        // عرض الإشعارات
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle"></i> ${message}`;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // حفظ البيانات
+        function saveContent() {
+            localStorage.setItem('mbl_data', JSON.stringify(appData));
+            renderContent();
+        }
+
+        // تحميل البيانات
+        function loadContent() {
+            const savedData = localStorage.getItem('mbl_data');
+            if (savedData) {
+                Object.assign(appData, JSON.parse(savedData));
+            }
+            renderContent();
+        }
+
+        // عرض المحتوى
+        function renderContent() {
+            // عرض المحتوى للزوار
+            document.getElementById('publicContent').innerHTML = appData.content;
+            
+            // عرض الملفات للأدمن
+            renderFiles();
+            
+            // تعبئة محرر النصوص للأدمن
+            document.getElementById('contentEditor').value = appData.content;
+        }
+
+        // عرض الملفات
+        function renderFiles() {
+            const filesContainer = document.getElementById('uploadedFiles');
+            if (!filesContainer) return;
+            
+            filesContainer.innerHTML = appData.files.map(file => `
+                <div class="file-item">
+                    <h3>${file.name}</h3>
+                    <p>${formatFileSize(file.size)} - ${file.type}</p>
+                    ${file.type.startsWith('image/') ? `<img src="${file.url}" style="max-width:200px;">` : ''}
+                </div>
+            `).join('');
+        }
+
+        // تنسيق حجم الملف
+        function formatFileSize(bytes) {
+            if (bytes >= 1073741824) return (bytes / 1073741824).toFixed(2) + ' GB';
+            if (bytes >= 1048576) return (bytes / 1048576).toFixed(2) + ' MB';
+            if (bytes >= 1024) return (bytes / 1024).toFixed(2) + ' KB';
+            return bytes + ' بايت';
+        }
+
+        // التهيئة الأولية
+        document.addEventListener('DOMContentLoaded', () => {
+            loadContent();
+        });
+    </script>
 </body>
 </html>
