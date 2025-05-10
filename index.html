@@ -3,53 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBL INFO 🏴‍☠️</title>
+    <title>MBL INFO 🏴‍☠️ | لوحة التحكم</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- شاشة الدخول -->
     <div class="login-screen" id="loginScreen">
         <div class="login-box">
-            <h1>MBL INFO 🏴‍☠️</h1>
-            <button onclick="showVisitorView()">الدخول كزائر</button>
+            <div class="logo">
+                <i class="fa fa-pirate-skull"></i>
+                <h1>MBL INFO <span class="pirate">🏴‍☠️</span></h1>
+            </div>
+            <button class="visitor-btn" onclick="showVisitorView()">
+                <i class="fas fa-eye"></i> الدخول كزائر
+            </button>
             <div class="admin-login">
-                <input type="password" id="adminPass" placeholder="كلمة مرور الإدمن">
-                <button onclick="checkAdminPass()">دخول كإدمن</button>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="adminPass" placeholder="كلمة مرور الإدمن">
+                </div>
+                <button class="admin-btn" onclick="checkAdminPass()">
+                    <i class="fas fa-user-shield"></i> دخول كإدمن
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- واجهة الزوار (للعرض فقط) -->
-    <div class="visitor-view" id="visitorView" style="display:none">
-        <header>
-            <h1>MBL INFO 🏴‍☠️</h1>
-            <p>كل الحقوق محفوظة © 2025</p>
+    <!-- واجهة الزوار -->
+    <div class="container" id="visitorView" style="display:none">
+        <header class="main-header">
+            <div class="logo">
+                <i class="fa fa-pirate-skull"></i>
+                <h1>MBL INFO <span class="pirate">🏴‍☠️</span></h1>
+            </div>
+            <button class="login-btn" onclick="showLogin()">
+                <i class="fas fa-sign-in-alt"></i> دخول الإدمن
+            </button>
         </header>
 
-        <main id="publicContent">
+        <main class="content-grid" id="publicContent">
             <!-- المحتوى المعروض للزوار -->
         </main>
 
-        <footer>
-            <p>للوصول كإدمن: <a href="#" onclick="showLogin()">تسجيل الدخول</a></p>
+        <footer class="main-footer">
+            <p>© 2025 جميع الحقوق محفوظة لـ <span>MBL INFO</span></p>
         </footer>
     </div>
 
     <!-- لوحة التحكم (للإدمن فقط) -->
-    <div class="admin-panel" id="adminPanel" style="display:none">
-        <header>
-            <h1>لوحة التحكم 🛡️</h1>
-            <button onclick="logout()">تسجيل الخروج</button>
+    <div class="admin-container" id="adminPanel" style="display:none">
+        <header class="admin-header">
+            <div class="admin-logo">
+                <i class="fas fa-skull-crossbones"></i>
+                <h1>لوحة التحكم <span class="pirate">🏴‍☠️</span></h1>
+            </div>
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+            </button>
         </header>
 
-        <div class="editor">
-            <h2>نشر محتوى جديد:</h2>
-            <textarea id="contentEditor"></textarea>
-            <button onclick="publishContent()">نشر</button>
-        </div>
+        <div class="admin-content">
+            <div class="upload-section">
+                <h2><i class="fas fa-upload"></i> رفع ملف جديد</h2>
+                <div class="upload-box" id="dropZone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>اسحب وأسقط الملفات هنا أو</p>
+                    <input type="file" id="fileInput" multiple>
+                    <label for="fileInput" class="upload-btn">اختر ملفات</label>
+                    <div class="file-types">
+                        <span><i class="fas fa-image"></i> صور</span>
+                        <span><i class="fas fa-file-archive"></i> ألعاب</span>
+                        <span><i class="fas fa-mobile"></i> تطبيقات</span>
+                    </div>
+                </div>
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress" id="progress"></div>
+                </div>
+            </div>
 
-        <div id="adminContent">
-            <!-- المحتوى المعدل من قبل الإدمن -->
+            <div class="content-editor">
+                <h2><i class="fas fa-edit"></i> محرر المحتوى</h2>
+                <textarea id="contentEditor" placeholder="اكتب محتوى جديد هنا..."></textarea>
+                <button class="publish-btn" onclick="publishContent()">
+                    <i class="fas fa-paper-plane"></i> نشر التحديثات
+                </button>
+            </div>
+
+            <div class="files-grid" id="adminContent">
+                <!-- الملفات والمحتوى المعدل -->
+            </div>
         </div>
     </div>
 
