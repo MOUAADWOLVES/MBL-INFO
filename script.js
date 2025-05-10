@@ -1,39 +1,59 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const accessBtn = document.getElementById('accessBtn');
-    const subscriptionPopup = document.getElementById('subscriptionPopup');
-    const mainContent = document.getElementById('mainContent');
-    
-    // تغيير لون نص "اضغط هنا"
-    window.changeColor = function() {
-        const clickHere = document.querySelector('.click-here');
-        clickHere.classList.toggle('black-white');
-    };
-    
-    // عد تنازلي للزر
-    let seconds = 5;
-    const countdown = setInterval(() => {
-        accessBtn.textContent = `انتظر ${seconds} ثوانٍ`;
-        seconds--;
-        
-        if (seconds < 0) {
-            clearInterval(countdown);
-            accessBtn.textContent = 'الدخول إلى الموقع';
-            accessBtn.classList.add('active');
-            accessBtn.disabled = false;
-            
-            accessBtn.addEventListener('click', function() {
-                subscriptionPopup.style.display = 'none';
-                mainContent.style.display = 'block';
-                
-                // تخزين في localStorage أن المستخدم قد اشترك
-                localStorage.setItem('subscribed', 'true');
-            });
-        }
-    }, 1000);
-    
-    // التحقق إذا كان المستخدم قد اشترك من قبل
-    if (localStorage.getItem('subscribed') === 'true') {
-        subscriptionPopup.style.display = 'none';
-        mainContent.style.display = 'block';
+// كلمة مرور الإدمن (يمكن تغييرها)
+const ADMIN_PASSWORD = "MBL12345";
+
+// عناصر DOM
+const loginScreen = document.getElementById('loginScreen');
+const visitorView = document.getElementById('visitorView');
+const adminPanel = document.getElementById('adminPanel');
+const publicContent = document.getElementById('publicContent');
+const adminContent = document.getElementById('adminContent');
+const contentEditor = document.getElementById('contentEditor');
+
+// تحميل المحتوى المحفوظ
+let savedContent = localStorage.getItem('mbl_content') || 
+                  "<h2>مرحبًا بكم في MBL INFO</h2><p>سيتم عرض المحتوى هنا</p>";
+
+// عرض واجهة الزوار
+function showVisitorView() {
+    loginScreen.style.display = 'none';
+    visitorView.style.display = 'block';
+    publicContent.innerHTML = savedContent;
+}
+
+// عرض شاشة الدخول
+function showLogin() {
+    visitorView.style.display = 'none';
+    loginScreen.style.display = 'flex';
+}
+
+// تسجيل دخول الإدمن
+function checkAdminPass() {
+    const passInput = document.getElementById('adminPass');
+    if (passInput.value === ADMIN_PASSWORD) {
+        loginScreen.style.display = 'none';
+        adminPanel.style.display = 'block';
+        adminContent.innerHTML = savedContent;
+    } else {
+        alert("كلمة المرور خاطئة!");
     }
-});
+}
+
+// نشر محتوى جديد
+function publishContent() {
+    savedContent = contentEditor.value;
+    localStorage.setItem('mbl_content', savedContent);
+    adminContent.innerHTML = savedContent;
+    publicContent.innerHTML = savedContent;
+    alert("تم النشر بنجاح!");
+}
+
+// تسجيل خروج الإدمن
+function logout() {
+    adminPanel.style.display = 'none';
+    showLogin();
+}
+
+// تحميل أولي
+window.onload = function() {
+    publicContent.innerHTML = savedContent;
+};
