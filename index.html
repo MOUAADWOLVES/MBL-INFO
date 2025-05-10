@@ -12,20 +12,25 @@
     <div class="login-screen" id="loginScreen">
         <div class="login-box">
             <div class="logo">
-                <i class="fa fa-pirate-skull"></i>
+                <i class="fas fa-skull"></i>
                 <h1>MBL INFO <span class="pirate">🏴‍☠️</span></h1>
             </div>
-            <button class="visitor-btn" onclick="showVisitorView()">
-                <i class="fas fa-eye"></i> الدخول كزائر
-            </button>
-            <div class="admin-login">
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="adminPass" placeholder="كلمة مرور الإدمن">
-                </div>
-                <button class="admin-btn" onclick="checkAdminPass()">
-                    <i class="fas fa-user-shield"></i> دخول كإدمن
+            <div class="access-options">
+                <button class="visitor-btn" onclick="showVisitorView()">
+                    <i class="fas fa-eye"></i> الدخول كزائر
                 </button>
+                <div class="or-divider">
+                    <span>أو</span>
+                </div>
+                <div class="admin-login">
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="adminPass" placeholder="كلمة مرور الإدمن">
+                    </div>
+                    <button class="admin-btn" onclick="checkAdminPass()">
+                        <i class="fas fa-user-shield"></i> دخول كإدمن
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -34,8 +39,12 @@
     <div class="container" id="visitorView" style="display:none">
         <header class="main-header">
             <div class="logo">
-                <i class="fa fa-pirate-skull"></i>
+                <i class="fas fa-skull"></i>
                 <h1>MBL INFO <span class="pirate">🏴‍☠️</span></h1>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="ابحث عن ملف أو محتوى...">
+                <button onclick="searchContent()"><i class="fas fa-search"></i></button>
             </div>
             <button class="login-btn" onclick="showLogin()">
                 <i class="fas fa-sign-in-alt"></i> دخول الإدمن
@@ -43,11 +52,19 @@
         </header>
 
         <main class="content-grid" id="publicContent">
-            <!-- المحتوى المعروض للزوار -->
+            <div class="welcome-message">
+                <h2><i class="fas fa-compass"></i> مرحبًا بك في أرشيف MBL</h2>
+                <p>استخدم مربع البحث أعلاه للعثور على الملفات والمحتوى المطلوب</p>
+            </div>
+            <div id="searchResults"></div>
         </main>
 
         <footer class="main-footer">
             <p>© 2025 جميع الحقوق محفوظة لـ <span>MBL INFO</span></p>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-shield-alt"></i> الشروط والأحكام</a>
+                <a href="#"><i class="fas fa-lock"></i> سياسة الخصوصية</a>
+            </div>
         </footer>
     </div>
 
@@ -58,40 +75,72 @@
                 <i class="fas fa-skull-crossbones"></i>
                 <h1>لوحة التحكم <span class="pirate">🏴‍☠️</span></h1>
             </div>
-            <button class="logout-btn" onclick="logout()">
-                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
-            </button>
+            <div class="admin-actions">
+                <div class="search-box">
+                    <input type="text" id="adminSearch" placeholder="ابحث في الملفات...">
+                    <button onclick="adminSearch()"><i class="fas fa-search"></i></button>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                </button>
+            </div>
         </header>
 
         <div class="admin-content">
             <div class="upload-section">
-                <h2><i class="fas fa-upload"></i> رفع ملف جديد</h2>
+                <h2><i class="fas fa-cloud-upload-alt"></i> رفع ملفات جديدة</h2>
                 <div class="upload-box" id="dropZone">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <p>اسحب وأسقط الملفات هنا أو</p>
+                    <div class="upload-icon">
+                        <i class="fas fa-file-upload"></i>
+                    </div>
+                    <p class="drag-text">اسحب وأسقط الملفات هنا</p>
+                    <p class="file-limits">الحد الأدنى: 10B | الحد الأقصى: 30GB</p>
                     <input type="file" id="fileInput" multiple>
                     <label for="fileInput" class="upload-btn">اختر ملفات</label>
                     <div class="file-types">
                         <span><i class="fas fa-image"></i> صور</span>
-                        <span><i class="fas fa-file-archive"></i> ألعاب</span>
-                        <span><i class="fas fa-mobile"></i> تطبيقات</span>
+                        <span><i class="fas fa-gamepad"></i> ألعاب</span>
+                        <span><i class="fas fa-mobile-alt"></i> تطبيقات</span>
+                        <span><i class="fas fa-file-video"></i> فيديو</span>
                     </div>
                 </div>
-                <div class="progress-bar" id="progressBar">
-                    <div class="progress" id="progress"></div>
+                <div class="upload-details">
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress" id="progress"></div>
+                        </div>
+                        <div class="progress-info">
+                            <span id="progressText">0%</span>
+                            <span id="fileCount">0 ملف</span>
+                            <span id="fileSize">0B</span>
+                        </div>
+                    </div>
+                    <div id="file-size-warning" class="warning-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span></span>
+                    </div>
                 </div>
             </div>
 
             <div class="content-editor">
                 <h2><i class="fas fa-edit"></i> محرر المحتوى</h2>
+                <div class="editor-toolbar">
+                    <button onclick="formatText('bold')"><i class="fas fa-bold"></i></button>
+                    <button onclick="formatText('italic')"><i class="fas fa-italic"></i></button>
+                    <button onclick="insertImage()"><i class="fas fa-image"></i></button>
+                    <button onclick="insertLink()"><i class="fas fa-link"></i></button>
+                </div>
                 <textarea id="contentEditor" placeholder="اكتب محتوى جديد هنا..."></textarea>
                 <button class="publish-btn" onclick="publishContent()">
                     <i class="fas fa-paper-plane"></i> نشر التحديثات
                 </button>
             </div>
 
-            <div class="files-grid" id="adminContent">
-                <!-- الملفات والمحتوى المعدل -->
+            <div class="files-section">
+                <h2><i class="fas fa-folder-open"></i> الملفات المرفوعة</h2>
+                <div class="files-grid" id="adminContent">
+                    <!-- سيتم ملؤها بالملفات -->
+                </div>
             </div>
         </div>
     </div>
