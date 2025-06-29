@@ -21,6 +21,7 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     background-color: var(--light-color);
+    padding-top: 100px;
 }
 
 .container {
@@ -30,13 +31,68 @@ body {
     padding: 0 15px;
 }
 
+/* شريط الروابط العلوي */
+.top-bar {
+    background-color: var(--dark-color);
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1001;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.top-bar .container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+.social-links a i {
+    font-size: 1.2rem;
+}
+
+.social-links a.telegram {
+    background-color: #0088cc;
+}
+
+.social-links a.facebook {
+    background-color: #3b5998;
+}
+
+.social-links a.instagram {
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
 /* Navigation */
 .navbar {
     background-color: var(--white);
     box-shadow: var(--shadow);
     position: fixed;
     width: 100%;
-    top: 0;
+    top: 40px;
     z-index: 1000;
     padding: 15px 0;
     transition: var(--transition);
@@ -85,7 +141,7 @@ body {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: var(--white);
     text-align: center;
-    padding: 180px 0 100px;
+    padding: 150px 0 100px;
     margin-top: 60px;
 }
 
@@ -139,6 +195,10 @@ body {
 }
 
 /* Sections Common Styles */
+section {
+    padding: 100px 0;
+}
+
 .section-header {
     text-align: center;
     margin-bottom: 60px;
@@ -162,7 +222,6 @@ body {
 
 /* About Section */
 .about {
-    padding: 100px 0;
     background-color: var(--white);
 }
 
@@ -193,9 +252,8 @@ body {
     box-shadow: var(--shadow);
 }
 
-/* Expertise Section */
-.expertise {
-    padding: 100px 0;
+/* Skills Section */
+.skills {
     background-color: var(--light-color);
 }
 
@@ -245,7 +303,6 @@ body {
 
 /* Tools Section */
 .tools {
-    padding: 100px 0;
     background-color: var(--white);
 }
 
@@ -313,7 +370,6 @@ body {
 
 /* Contact Section */
 .contact {
-    padding: 100px 0;
     background-color: var(--light-color);
 }
 
@@ -483,10 +539,10 @@ body {
     
     .nav-links {
         position: fixed;
-        top: 80px;
+        top: 100px;
         right: -100%;
         width: 80%;
-        height: calc(100vh - 80px);
+        height: calc(100vh - 100px);
         background-color: var(--white);
         flex-direction: column;
         align-items: center;
@@ -521,11 +577,19 @@ body {
     .section-header h2 {
         font-size: 2rem;
     }
+    
+    .social-links a span {
+        display: none;
+    }
+    
+    .social-links a {
+        padding: 8px 12px;
+    }
 }
 
 @media (max-width: 576px) {
     .hero {
-        padding: 150px 0 80px;
+        padding: 120px 0 80px;
     }
     
     .hero h1 {
@@ -536,4 +600,8 @@ body {
     .tools-grid {
         grid-template-columns: 1fr;
     }
+    
+    .top-bar .container {
+        justify-content: center;
     }
+}
