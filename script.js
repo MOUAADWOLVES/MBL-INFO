@@ -45,15 +45,40 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Form submission
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('شكراً لتواصلك! سنرد عليك في أقرب وقت ممكن.');
-        contactForm.reset();
-    });
-}
+// Form submission with mailto
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formMessage = document.getElementById('formMessage');
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    
+    // Basic validation
+    if (!name || !email || !message) {
+        formMessage.textContent = 'الرجاء ملء جميع الحقول المطلوبة';
+        formMessage.className = 'form-message error';
+        return;
+    }
+    
+    // Create mailto link
+    const subject = `رسالة جديدة من ${name}`;
+    const body = `المرسل: ${name}%0D%0Aالبريد الإلكتروني: ${email}%0D%0A%0D%0A${message}`;
+    const mailtoLink = `mailto:vbb3476746098@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    
+    // Open default email client
+    window.location.href = mailtoLink;
+    
+    // Show success message
+    formMessage.textContent = 'جاري فتح بريدك الإلكتروني لإرسال الرسالة...';
+    formMessage.className = 'form-message success';
+    document.getElementById('contactForm').reset();
+    
+    // Fallback message
+    setTimeout(() => {
+        formMessage.textContent += ' إذا لم يفتح التطبيق، يرجى إرسال الرسالة يدوياً.';
+    }, 3000);
+});
 
 // Animation on scroll
 const animateOnScroll = () => {
