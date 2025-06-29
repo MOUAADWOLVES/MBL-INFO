@@ -8,6 +8,8 @@
     --white: #fff;
     --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
+    --success-color: #28a745;
+    --error-color: #dc3545;
 }
 
 * {
@@ -171,6 +173,10 @@ body {
     font-weight: 500;
     transition: var(--transition);
     display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem;
 }
 
 .btn.primary {
@@ -186,6 +192,7 @@ body {
 .btn.secondary {
     border: 2px solid var(--white);
     color: var(--white);
+    background: transparent;
 }
 
 .btn.secondary:hover {
@@ -445,6 +452,27 @@ section {
     resize: vertical;
 }
 
+.form-message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+.form-message.success {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+    display: block;
+}
+
+.form-message.error {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+    display: block;
+}
+
 /* Footer */
 .footer {
     background-color: var(--dark-color);
@@ -604,4 +632,4 @@ section {
     .top-bar .container {
         justify-content: center;
     }
-}
+    }
