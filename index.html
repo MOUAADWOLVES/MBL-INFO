@@ -6,78 +6,192 @@
     <title>معاذ | خبير أدوات الصيد والاختراق</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">معاذ</a>
+            <div class="nav-links">
+                <a href="#about">من أنا</a>
+                <a href="#expertise">تخصصاتي</a>
+                <a href="#tools">أدواتي</a>
+                <a href="#contact">تواصل</a>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
     <header class="hero">
         <div class="container">
             <h1>معاذ</h1>
             <p class="title">خبير أدوات الصيد والاختراق</p>
-            <div class="social-links">
-                <a href="https://t.me/MOUAAD_INF0" target="_blank"><i class="fab fa-telegram"></i></a>
-                <a href="https://www.facebook.com/profile.php?id=100076145948086" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/xtez_7?igsh=MW1jbG91ajZ6NTl2YQ==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn primary">تواصل معي</a>
+                <a href="#tools" class="btn secondary">استكشف أدواتي</a>
             </div>
         </div>
     </header>
 
-    <section class="about">
+    <section id="about" class="about">
         <div class="container">
-            <h2>من أنا؟</h2>
-            <p>أنا معاذ، مطور ومتخصص في أدوات الصيد والاختراق الأمني. لدي خبرة واسعة في مجال الأمن السيبراني وتطوير أدوات متخصصة للاختبارات الأمنية.</p>
+            <div class="section-header">
+                <h2>من أنا؟</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>أنا معاذ، مطور ومتخصص في أدوات الصيد والاختراق الأمني. لدي خبرة واسعة في مجال الأمن السيبراني وتطوير أدوات متخصصة للاختبارات الأمنية.</p>
+                    <p>أساعد في حماية الأنظمة والشبكات من خلال تطوير أدوات متقدمة للكشف عن الثغرات وتعزيز الحماية.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/400x300" alt="معاذ - خبير أمني">
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="expertise">
+    <section id="expertise" class="expertise">
         <div class="container">
-            <h2>مجالات تخصصي</h2>
-            <div class="skills">
-                <div class="skill-item">
-                    <i class="fas fa-shield-alt"></i>
+            <div class="section-header">
+                <h2>مجالات تخصصي</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
                     <h3>أدوات الاختراق الأخلاقي</h3>
-                    <p>تطوير أدوات متقدمة لاختبار الاختراق والتقييم الأمني</p>
+                    <p>تطوير أدوات متقدمة لاختبار الاختراق والتقييم الأمني للأنظمة والشبكات</p>
                 </div>
-                <div class="skill-item">
-                    <i class="fas fa-fish"></i>
-                    <h3>أدوات الصيد</h3>
-                    <p>تصميم أنظمة صيد ذكية ومتطورة لأغراض أمنية</p>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <h3>أنظمة الصيد المتقدمة</h3>
+                    <p>تصميم أنظمة صيد ذكية باستخدام أحدث التقنيات لأغراض أمنية متخصصة</p>
                 </div>
-                <div class="skill-item">
-                    <i class="fas fa-lock"></i>
-                    <h3>حماية الأنظمة</h3>
-                    <p>تحليل الثغرات وتطوير حلول أمنية متكاملة</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="tools">
-        <div class="container">
-            <h2>أدواتي المميزة</h2>
-            <div class="tool-list">
-                <div class="tool-card">
-                    <i class="fas fa-bug"></i>
-                    <h3>أداة كشف الثغرات</h3>
-                    <p>أداة متكاملة لاكتشاف الثغرات الأمنية في الأنظمة</p>
-                </div>
-                <div class="tool-card">
-                    <i class="fas fa-network-wired"></i>
-                    <h3>نظام الصيد الذكي</h3>
-                    <p>نظام متقدم للصيد الأمني مع خوارزميات ذكاء اصطناعي</p>
-                </div>
-                <div class="tool-card">
-                    <i class="fas fa-user-secret"></i>
-                    <h3>حماية الهوية</h3>
-                    <p>حزمة أدوات لحماية الهوية الرقمية والتخفي</p>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>تحليل الثغرات الأمنية</h3>
+                    <p>تحليل شامل للثغرات الأمنية وتقديم حلول حماية مخصصة</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
+    <section id="tools" class="tools">
         <div class="container">
-            <p>للتواصل المهني: <a href="mailto:contact@example.com">contact@example.com</a></p>
-            <p>جميع الحقوق محفوظة &copy; <span id="year"></span> - معاذ</p>
+            <div class="section-header">
+                <h2>أدواتي المميزة</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-bug"></i>
+                        <h3>أداة كشف الثغرات</h3>
+                    </div>
+                    <p>نظام متكامل للكشف التلقائي عن الثغرات الأمنية في الخوادم والتطبيقات</p>
+                    <ul class="tool-features">
+                        <li>مسح شامل للثغرات المعروفة</li>
+                        <li>تقرير مفصل بالنتائج</li>
+                        <li>اقتراحات للإصلاح</li>
+                    </ul>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-network-wired"></i>
+                        <h3>نظام الصيد الذكي</h3>
+                    </div>
+                    <p>منصة متقدمة للصيد الأمني تعتمد على خوارزميات الذكاء الاصطناعي</p>
+                    <ul class="tool-features">
+                        <li>تحليل سلوكي متقدم</li>
+                        <li>تحديد التهديدات في الوقت الحقيقي</li>
+                        <li>واجهة تحكم شاملة</li>
+                    </ul>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-user-secret"></i>
+                        <h3>حزمة الحماية الشاملة</h3>
+                    </div>
+                    <p>مجموعة أدوات متكاملة لحماية الهوية الرقمية والتخفي الأمني</p>
+                    <ul class="tool-features">
+                        <li>إخفاء الهوية الرقمية</li>
+                        <li>حماية من التتبع</li>
+                        <li>تشفير متقدم</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>تواصل معي</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>وسائل التواصل</h3>
+                    <div class="contact-method">
+                        <i class="fab fa-telegram"></i>
+                        <a href="https://t.me/MOUAAD_INF0" target="_blank">t.me/MOUAAD_INF0</a>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fab fa-facebook"></i>
+                        <a href="https://www.facebook.com/profile.php?id=100076145948086" target="_blank">facebook.com/معاذ</a>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fab fa-instagram"></i>
+                        <a href="https://www.instagram.com/xtez_7" target="_blank">instagram.com/xtez_7</a>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="اسمك" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="رسالتك" required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary">إرسال الرسالة</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="#">معاذ</a>
+                    <p>خبير أدوات الصيد والاختراق</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#about">من أنا</a>
+                    <a href="#expertise">تخصصاتي</a>
+                    <a href="#tools">أدواتي</a>
+                    <a href="#contact">تواصل</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://t.me/MOUAAD_INF0" target="_blank"><i class="fab fa-telegram"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=100076145948086" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/xtez_7" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; <span id="year"></span> - معاذ</p>
+            </div>
         </div>
     </footer>
 
