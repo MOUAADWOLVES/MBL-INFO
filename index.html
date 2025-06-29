@@ -180,17 +180,18 @@
                         <a href="https://www.instagram.com/xtez_7" target="_blank">instagram.com/xtez_7</a>
                     </div>
                 </div>
-                <form class="contact-form">
+                <form id="contactForm" class="contact-form">
                     <div class="form-group">
-                        <input type="text" placeholder="اسمك" required>
+                        <input type="text" id="name" placeholder="اسمك" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="بريدك الإلكتروني" required>
+                        <input type="email" id="email" placeholder="بريدك الإلكتروني" required>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="رسالتك" required></textarea>
+                        <textarea id="message" placeholder="رسالتك" required></textarea>
                     </div>
                     <button type="submit" class="btn primary">إرسال الرسالة</button>
+                    <div id="formMessage" class="form-message"></div>
                 </form>
             </div>
         </div>
@@ -224,4 +225,4 @@
 
     <script src="script.js"></script>
 </body>
-                        </html>
+</html>
