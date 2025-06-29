@@ -1,20 +1,63 @@
 // Set current year in footer
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+// Mobile menu toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
     });
 });
 
+// Smooth scrolling for all links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Sticky navbar on scroll
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.style.padding = '10px 0';
+        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+    } else {
+        navbar.style.padding = '15px 0';
+        navbar.style.boxShadow = 'var(--shadow)';
+    }
+});
+
+// Form submission
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('شكراً لتواصلك! سنرد عليك في أقرب وقت ممكن.');
+        contactForm.reset();
+    });
+}
+
 // Animation on scroll
 const animateOnScroll = () => {
-    const elements = document.querySelectorAll('.service-card, h2, .about p');
+    const elements = document.querySelectorAll('.about-content, .skill-card, .tool-card, .contact-content');
     
     elements.forEach(element => {
         const elementPosition = element.getBoundingClientRect().top;
@@ -29,7 +72,7 @@ const animateOnScroll = () => {
 
 // Set initial state for animation
 window.addEventListener('DOMContentLoaded', () => {
-    const elements = document.querySelectorAll('.service-card, h2, .about p');
+    const elements = document.querySelectorAll('.about-content, .skill-card, .tool-card, .contact-content');
     
     elements.forEach(element => {
         element.style.opacity = '0';
